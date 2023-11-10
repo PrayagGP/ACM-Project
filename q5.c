@@ -1,16 +1,34 @@
-#include<stdio.h>
+#include <stdio.h>
 
-int main()
-{
-    int i,j,k;
-    for(i=1;i<4;i++)
-    {
-        for(j=1;j<4;j++)
-        {
-            for(k=1;k<4;k++)
-            if(i!=j && j!=k && k!=i)
-            printf("%d %d %d\n",i,j,k);
-        }
+int main() {
+    FILE *file;
+    char data[100];
+
+    // Write data to the file
+    file = fopen("DATA.txt", "w");
+    if (file == NULL) {
+        printf("Unable to create the file.\n");
+        return 1;
     }
-    
+
+    printf("Enter data to write to the file:\n");
+    scanf("%s", data);
+    fprintf(file, "%s", data);
+
+    fclose(file);
+
+    // Read data from the file and display it
+    file = fopen("DATA.txt", "r");
+    if (file == NULL) {
+        printf("Unable to open the file.\n");
+        return 1;
+    }
+
+    printf("\nData read from the file:\n");
+    fscanf(file, "%s", data);
+    printf("%s\n", data);
+
+    fclose(file);
+
+    return 0;
 }

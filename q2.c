@@ -1,12 +1,25 @@
-#include<stdio.h>
-int main()
-{
-    int x1,x2,x3,y1,y2,y3,check;
-    scanf("%d %d %d %d %d %d",&x1,&y1,&x2,&y2,&x3,&y3);
-    check=x1*(y2-y3) + x2*(y3-y1) + x3*(y1-y2);
-    if(!check)
-    printf("The points lie on a straight line\n");
-    else
-    printf("The points do not lie on a straight line\n");
+#include <stdio.h>
 
+int findMax(int arr[], int size) {
+    if (size == 1)
+        return arr[0];
+    else {
+        int maxInRest = findMax(arr + 1, size - 1);
+        return (arr[0] > maxInRest) ? arr[0] : maxInRest;
+    }
+}
+
+int main() {
+    int size, i;
+    printf("Enter the size of the array: ");
+    scanf_s("%d", &size);
+
+    int arr[size];
+    printf("Enter %d elements in the array:\n", size);
+    for (i = 0; i < size; i++)
+        scanf_s("%d", &arr[i]);
+
+    printf("The largest number in the array is: %d\n", findMax(arr, size));
+
+    return 0;
 }
